@@ -1,15 +1,24 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'authentication.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'login.dart';
 import 'root_page.dart';
 
 
-void main() => runApp(MyApp());
-BaseAuth auth=new Auth();
+Future <void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
+
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    WidgetsFlutterBinding.ensureInitialized();
+    Firebase.initializeApp();
     return MaterialApp(
         title: 'Calendar App',
         debugShowCheckedModeBanner: false,
@@ -29,6 +38,7 @@ class MyApp extends StatelessWidget {
           ),
 
         ),
+
         home: new RootPage(auth: new Auth())
     );
   }
